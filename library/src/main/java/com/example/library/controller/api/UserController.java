@@ -1,20 +1,15 @@
 package com.example.library.controller.api;
 
-import java.net.Authenticator.RequestorType;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.HttpStatusCode;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 
@@ -30,22 +25,22 @@ public class UserController {
 	@Qualifier("dbUserService")
 	private UserService userService;
 	
-	@PostMapping(value = "/api/addUser", consumes = "application/json")
-	public User create(@Valid @RequestBody User user) {
+	@PostMapping(value = "/api/user/new", consumes = "application/json")
+	public User createUser(@Valid @RequestBody User user) {
 		return userService.create(user);
 	}
 	
-	@GetMapping("/api/getAllUser")
+	@GetMapping("/api/user/all")
 	public Iterable<User> getAllUser() {
 		return userService.getAll();
 	}
 	
-	@GetMapping("/api/getUser/{id}")
+	@GetMapping("/api/user/{id}")
 	public Optional<User> getUserById(@PathVariable int id) {
 		return userService.getById(id);
 	}
 	
-	@DeleteMapping("/api/deleteUser/{id}")
+	@DeleteMapping("/api/user/{id}/delete")
 	public Boolean deleteUser(@PathVariable int id) {
 		Boolean foundUser = userService.delete(id);
 		

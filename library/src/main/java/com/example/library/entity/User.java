@@ -1,9 +1,5 @@
 package com.example.library.entity;
 
-import java.sql.Date;
-
-import com.mysql.cj.x.protobuf.MysqlxDatatypes.Array;
-
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;

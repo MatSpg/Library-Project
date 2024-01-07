@@ -1,7 +1,5 @@
 package com.example.library.entity;
 
-import java.sql.Date;
-
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -17,23 +15,23 @@ public class Book {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 	
-	@Column
+	@Column(name = "title")
 	private String title;
 	
-	@Column
+	@Column(name = "description")
 	private String description;
 
-	@Column
+	@Column(name = "cover")
 	private String cover;
 	
-	@Column
+	@Column(name = "author_id")
 	private int author_id;
 	
-	@Column
+	@Column(name = "isbn")
 	private String isbn;
 	
-	@Column
-	private Date date;
+	@Column(name = "date")
+	private String date;
 	
 	//Getters and Setters
 	public int getId() {
@@ -84,11 +82,11 @@ public class Book {
 		this.isbn = isbn;
 	}
 
-	public Date getDate() {
+	public String getDate() {
 		return date;
 	}
 
-	public void setDate(Date date) {
+	public void setDate(String date) {
 		this.date = date;
 	}
 }
