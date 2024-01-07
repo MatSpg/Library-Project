@@ -5,6 +5,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -25,8 +26,12 @@ public class UserController {
 	@Qualifier("dbUserService")
 	private UserService userService;
 	
+	@Autowired
+	private PasswordEncoder passwordEncoder;
+	
 	@PostMapping(value = "/api/user/new", consumes = "application/json")
 	public User createUser(@Valid @RequestBody User user) {
+		user.setPassword(passwordEncoder.encode(user.getPassword()));
 		return userService.create(user);
 	}
 	
