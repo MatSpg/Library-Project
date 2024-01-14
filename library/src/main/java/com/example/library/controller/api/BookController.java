@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 
@@ -19,28 +20,29 @@ import com.example.library.service.BookService;
 import jakarta.validation.Valid;
 
 @RestController
+@RequestMapping("/api/book")
 public class BookController {
 
 	@Autowired
 	@Qualifier("dbBookService")
 	private BookService bookService;
 	
-	@PostMapping("/api/book/new")
+	@PostMapping("/new")
 	public Book createBook(@Valid @RequestBody Book book) {
 		return bookService.create(book);
 	}
 	
-	@GetMapping("/api/book/all")
+	@GetMapping("/all")
 	public Iterable<Book> getAllBook() {
 		return bookService.getAll();
 	}
 	
-	@GetMapping("/api/book/{id}")
+	@GetMapping("/{id}")
 	public Optional<Book> getBookById(@PathVariable int id) {
 		return bookService.getById(id);
 	}
 	
-	@DeleteMapping("/api/book/{id}/delete")
+	@DeleteMapping("/{id}/delete")
 	public Boolean deleteBook(@PathVariable int id) {
 		Boolean foundBook = bookService.delete(id);
 		
