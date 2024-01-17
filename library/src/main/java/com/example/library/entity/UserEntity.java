@@ -1,5 +1,6 @@
 package com.example.library.entity;
 
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -9,7 +10,7 @@ import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "users")
-public class User {
+public class UserEntity {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -21,6 +22,9 @@ public class User {
 	@Column(name = "password")
 	private String password;
 	
+	@Column(name = "role")
+	private String role;
+
 	@Column(name = "name")
 	private String name;
 	
@@ -62,6 +66,14 @@ public class User {
 	
 	public void setPassword(String password) {
 		this.password = password;
+	}
+	
+	public String getRole() {
+		return role;
+	}
+
+	public void setRole(String role) {
+		this.role = role;
 	}
 
 	public String getName() {
@@ -112,16 +124,22 @@ public class User {
 		this.favourite_books = favourite_books;
 	}
 	
-	public User() {}
+	public UserEntity() {}
 	
-	public User(String username, String password, String name, String surname, String biography, String image, String birthdate, String favourite_books) {
+	public UserEntity(String username, String password, String role, String name, String surname, String biography, String image, String birthdate, String favourite_books) {
 		this.username = username;
 		this.password = password;
+		this.role = role;
 		this.name = name;
 		this.surname = surname;
 		this.biography = biography;
 		this.image = image;
 		this.birthdate = birthdate;
 		this.favourite_books = favourite_books;
+	}
+
+	public UserEntity orElseThrow(Object object) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }

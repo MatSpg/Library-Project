@@ -5,7 +5,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.example.library.entity.User;
+import com.example.library.entity.UserEntity;
 import com.example.library.repository.UserRepository;
 
 @Service("dbUserService")
@@ -15,23 +15,28 @@ public class DbUserService implements UserService {
 	private UserRepository userRepository;
 	
 	@Override
-	public Iterable<User> getAll() {
+	public Iterable<UserEntity> getAll() {
 		return userRepository.findAll();
 	}
 	
 	@Override
-	public Optional<User> getById(int id) {
+	public Optional<UserEntity> getById(int id) {
 		return userRepository.findById(id);
 	}
 	
 	@Override
-	public User create(User user) {
+	public UserEntity findByUsername(String username) {
+		return userRepository.findByUsername(username);
+	}
+	
+	@Override
+	public UserEntity create(UserEntity user) {
 		return userRepository.save(user);
 	}
 	
 	@Override
 	public Boolean delete(int id) {
-		Optional<User> foundUser = userRepository.findById(id);
+		Optional<UserEntity> foundUser = userRepository.findById(id);
 		
 		if (foundUser.isEmpty()) {
 			return false;

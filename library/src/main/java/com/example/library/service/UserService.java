@@ -2,13 +2,14 @@ package com.example.library.service;
 
 import java.util.Optional;
 
-import com.example.library.entity.User;
+import com.example.library.entity.UserEntity;
 
-public interface UserService {
+public interface UserService{
 	
-	public Iterable<User> getAll();
-	public Optional<User> getById(int id);
-	public User create(User user);
+	public Iterable<UserEntity> getAll();
+	public Optional<UserEntity> getById(int id);
+	public UserEntity findByUsername(String username);
+	public UserEntity create(UserEntity user);
 	public Boolean delete(int id);
 	
 	
