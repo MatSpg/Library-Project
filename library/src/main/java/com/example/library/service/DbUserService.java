@@ -45,5 +45,11 @@ public class DbUserService implements UserService {
 		userRepository.delete(foundUser.get());
 		return true;
 	}
+
+	@Override
+	public boolean existsByUsername(String username) {
+		// TODO Auto-generated method stub
+		return userRepository.existsByUsername(username);
+	}
 	
 }

@@ -14,8 +14,10 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.example.library.dto.AuthResponseDto;
 import com.example.library.dto.LoginDto;
 import com.example.library.entity.UserEntity;
+import com.example.library.jwt.JwtTokenGenerator;
 import com.example.library.service.UserService;
 
 import jakarta.validation.Valid;
@@ -28,11 +30,18 @@ public class AuthController {
 	@Qualifier("dbUserService")
 	private UserService userService;
 	
-	@Autowired
 	private AuthenticationManager authenticationManager;
+	private PasswordEncoder passwordEncoder;
+	private JwtTokenGenerator jwtTokenGenerator;
 	
 	@Autowired
-	private PasswordEncoder passwordEncoder;
+	public AuthController(AuthenticationManager authenticationManager, PasswordEncoder passwordEncoder, JwtTokenGenerator jwtTokenGenerator) {
+		this.authenticationManager = authenticationManager;
+		this.passwordEncoder = passwordEncoder;
+		this.jwtTokenGenerator = jwtTokenGenerator;
+	}
+	
+	
 	
 	@PostMapping(value = "/register", consumes = "application/json")
 	public ResponseEntity<String> register(@Valid @RequestBody UserEntity user) {
@@ -47,9 +56,12 @@ public class AuthController {
 	}
 	
 	@PostMapping(value = "/login", consumes = "application/json")
-	public ResponseEntity<String> login(@RequestBody LoginDto loginDto) {
+	public ResponseEntity<AuthResponseDto> login(@RequestBody LoginDto loginDto) {
 		Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(loginDto.getUsername(), loginDto.getPassword()));
 		SecurityContextHolder.getContext().setAuthentication(authentication);
-		return new ResponseEntity<>("Login effettuato con successo.", HttpStatus.OK);
+		
+		String token = jwtTokenGenerator.generateToken(authentication);
+		
+		return new ResponseEntity<>(new AuthResponseDto(token), HttpStatus.OK);
 	}
 }
