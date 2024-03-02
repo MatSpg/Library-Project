@@ -5,6 +5,7 @@ import java.util.Collection;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -34,7 +35,7 @@ public class CustomUserDetailsService implements UserDetailsService {
 			
 			return new User(user.getUsername(), user.getPassword(), authorities);
 		} else {
-			throw new UsernameNotFoundException("Nome utente non trovato o inesistente: "+username);
+			throw new BadCredentialsException("Nome utente non trovato o inesistente: "+username);
 		}
 	}
 	

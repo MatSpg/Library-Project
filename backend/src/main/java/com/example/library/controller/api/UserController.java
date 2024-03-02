@@ -17,8 +17,8 @@ import com.example.library.entity.UserEntity;
 import com.example.library.service.UserService;
 
 @RestController
-@RequestMapping("/api/user")
 @CrossOrigin("*")
+@RequestMapping("/api/user")
 public class UserController {
 	
 	@Autowired

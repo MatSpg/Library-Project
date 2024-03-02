@@ -2,7 +2,7 @@ import { Injectable, OnInit } from '@angular/core';
 import { HttpClient, HttpHeaders } from  '@angular/common/http';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class AuthService implements OnInit {
 
@@ -25,13 +25,19 @@ export class AuthService implements OnInit {
   }
 
   login() {
-    this.http.post<any>("http://localhost:8080/api/auth/login", {"username": "MattiaSpag", "password": "mattia"}).subscribe(data => {
+    this.http.post<any>("http://localhost:8080/api/auth/login", {"username": "MattiaSpag", "password": "mattia"}).subscribe(
+    data => {
       localStorage.setItem("token", data.tokenType + data.accessToken);
-    })
+      alert("Token: "+ data.accessToken)
+    },
+    error => {
+      console.log(error)
+    }
+    )
   }
 
   getUser() {
-    const headers: HttpHeaders = new HttpHeaders({ 'Authorization': ""+ localStorage.getItem("token") +""})
+    const headers: HttpHeaders = new HttpHeaders({'Authorization': ""+ localStorage.getItem("token") +""})
     this.http.get<any>("http://localhost:8080/api/user/all", { headers: headers }).subscribe(
       data => console.log(data),
       error => console.log(error)

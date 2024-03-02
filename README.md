@@ -56,7 +56,7 @@ Per configurare il progetto, modifica i file di configurazione appropriati:
 1. Avvia il back-end (Spring Boot):
 
    ```bash
-   cd library
+   cd backend
    ./mvnw spring-boot:run
    ```
 
@@ -75,7 +75,7 @@ Il Front-End sarà accessibile all'indirizzo `http://localhost:4200/` di default
 
 Il progetto è organizzato nelle seguenti directory principali:
 
-- `library`: Contiene il codice sorgente del back-end basato su Spring Boot.
+- `backend`: Contiene il codice sorgente del back-end basato su Spring Boot.
 - `frontend`: Contiene il codice sorgente del front-end basato su Angular.
 - `File Progetto`: Contiene il progetto per lo sviluppo del sito.
 
